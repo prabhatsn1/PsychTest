@@ -83,26 +83,26 @@ async function ensureSeeded() {
   }
 }
 
-function makeWhereFilter<T>(where: Record<string, unknown>) {
+function makeWhereFilter<T extends object>(where: Record<string, unknown>) {
   return (item: T) =>
     Object.entries(where).every(
       ([key, val]) => (item as Record<string, unknown>)[key] === val
     );
 }
 
-function applySelect<T extends Record<string, unknown>>(
+function applySelect<T extends object>(
   item: T,
   select?: Record<string, boolean>
 ): Partial<T> {
-  if (!select) return { ...item };
+  if (!select) return { ...item } as Partial<T>;
   const result: Record<string, unknown> = {};
   for (const [key, included] of Object.entries(select)) {
-    if (included) result[key] = item[key];
+    if (included) result[key] = (item as Record<string, unknown>)[key];
   }
   return result as Partial<T>;
 }
 
-function createModelDelegate<T extends Record<string, unknown>>(
+function createModelDelegate<T extends object>(
   getData: () => T[],
   setData: (items: T[]) => void
 ) {
@@ -120,13 +120,14 @@ function createModelDelegate<T extends Record<string, unknown>>(
       if (args?.orderBy) {
         const [field, dir] = Object.entries(args.orderBy)[0];
         items.sort((a, b) => {
-          const av = a[field] as string | number | Date;
-          const bv = b[field] as string | number | Date;
+          const av = (a as Record<string, unknown>)[field] as string | number | Date;
+          const bv = (b as Record<string, unknown>)[field] as string | number | Date;
           const cmp = av > bv ? 1 : av < bv ? -1 : 0;
           return dir === "desc" ? -cmp : cmp;
         });
       }
-      return items.map((item) => applySelect(item, args?.select));
+      if (!args?.select) return items as T[];
+      return items.map((item) => applySelect(item, args.select));
     },
     async create(args: { data: Record<string, unknown> }) {
       await ensureSeeded();
@@ -136,7 +137,7 @@ function createModelDelegate<T extends Record<string, unknown>>(
         ...args.data,
         createdAt: now,
         updatedAt: now,
-      } as T;
+      } as unknown as T;
       const items = getData();
       items.push(newItem);
       setData(items);
