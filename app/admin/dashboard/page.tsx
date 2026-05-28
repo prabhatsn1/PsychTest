@@ -13,7 +13,7 @@ export default async function AdminDashboardPage() {
 
   const serializedReports = reports.map((r) => ({
     ...r,
-    dateOfAssessment: r.dateOfAssessment.toISOString(),
+    dateOfAssessment: r.dateOfAssessment?.toISOString() ?? null,
     createdAt: r.createdAt.toISOString(),
     updatedAt: r.updatedAt.toISOString(),
   }));

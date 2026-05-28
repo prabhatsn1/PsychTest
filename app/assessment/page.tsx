@@ -181,7 +181,7 @@ export default function AssessmentPage() {
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <div
-              className="bg-accent-300 h-2 rounded-full transition-all duration-500 ease-out"
+              className="bg-indigo-500 h-2 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -233,7 +233,7 @@ export default function AssessmentPage() {
                     onChange={(e) =>
                       setStudentInfo((s) => ({ ...s, studentName: e.target.value }))
                     }
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
                     placeholder="e.g. Hardik Dwivedi"
                   />
                 </div>
@@ -260,7 +260,7 @@ export default function AssessmentPage() {
                           mobile: e.target.value.replace(/\D/g, ""),
                         }))
                       }
-                      className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
+                      className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
                       placeholder="Enter 10-digit number"
                     />
                   </div>
@@ -280,7 +280,7 @@ export default function AssessmentPage() {
                     onChange={(e) =>
                       setStudentInfo((s) => ({ ...s, classSection: e.target.value }))
                     }
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
                     placeholder="e.g. Xth - B"
                   />
                 </div>
@@ -309,14 +309,14 @@ export default function AssessmentPage() {
                         }
                         className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200 ${
                           isSelected
-                            ? "border-accent-300 bg-brand-50 text-brand-900"
+                            ? "border-indigo-500 bg-indigo-50 text-indigo-900"
                             : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50"
                         }`}
                       >
                         <span
                           className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-semibold mr-3 ${
                             isSelected
-                              ? "bg-accent-300 text-white"
+                              ? "bg-indigo-500 text-white"
                               : "bg-gray-100 text-gray-500"
                           }`}
                         >
@@ -346,7 +346,7 @@ export default function AssessmentPage() {
                   type="button"
                   onClick={handleNext}
                   disabled={!canGoNext()}
-                  className="px-6 py-2.5 text-sm font-medium text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Next
                 </button>
@@ -354,7 +354,7 @@ export default function AssessmentPage() {
                 <button
                   type="submit"
                   disabled={!canGoNext() || pending}
-                  className="px-6 py-2.5 text-sm font-medium text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {pending ? "Submitting..." : "Submit Assessment"}
                 </button>
@@ -376,11 +376,11 @@ export default function AssessmentPage() {
                 }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   i === currentStep
-                    ? "bg-accent-300 scale-125"
+                    ? "bg-indigo-500 scale-125"
                     : i === 0
-                      ? "bg-accent-200"
+                      ? "bg-indigo-200"
                       : answers[`q${i}`]
-                        ? "bg-accent-300"
+                        ? "bg-indigo-300"
                         : "bg-gray-200"
                 }`}
                 title={

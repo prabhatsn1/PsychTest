@@ -45,13 +45,13 @@ export default function AssessmentSuccess() {
           <div className="space-y-3">
             <Link
               href="/"
-              className="block w-full px-5 py-2.5 text-sm font-medium text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-colors text-center"
+              className="block w-full px-5 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-colors text-center"
             >
               Back to Home
             </Link>
             <Link
               href="/assessment"
-              className="block w-full px-5 py-2.5 text-sm font-medium text-brand-600 bg-brand-50 rounded-xl hover:bg-brand-100 transition-colors text-center"
+              className="block w-full px-5 py-2.5 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition-colors text-center"
             >
               Take Another Assessment
             </Link>
