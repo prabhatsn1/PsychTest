@@ -1,4 +1,4 @@
-import type { TraitProfile } from "./types";
+import type { TraitProfile, ElaboratedProfile } from "./types";
 
 const traitDefinitions: Record<
   string,
@@ -118,4 +118,129 @@ export function buildTraitProfiles(
 export function getDominantAndSecondary(traits: TraitProfile[]) {
   const sorted = [...traits].sort((a, b) => b.score - a.score);
   return { dominant: sorted[0], secondary: sorted[1] };
+}
+
+const elaboratedProfiles: Record<string, ElaboratedProfile> = {
+  analytical: {
+    profileTitle: "Analytical & Logical Thinker",
+    coreInclination:
+      "The student shows a strong preference for logic, structure, problem-solving, and objective reasoning.",
+    naturalStrengths: [
+      "Analysing problems step-by-step",
+      "Working with numbers, systems, or data",
+      "Identifying patterns and errors",
+      "Thinking objectively rather than emotionally",
+    ],
+    preferredLearningStyle: [
+      "Clear concepts, formulas, models",
+      "Problem sets, experiments, case analysis",
+      "Independent or focused work environments",
+    ],
+    typicalBehaviours: [
+      'Asks "why" and "how does this work?"',
+      "Enjoys solving puzzles or technical challenges",
+      "Prefers clarity over ambiguity",
+    ],
+    motivatorsInterests: [
+      "Mastery, accuracy, efficiency",
+      "Subjects with right/wrong answers",
+    ],
+    explorationPathways:
+      "Engineering, technology, data science, finance, economics, pure sciences",
+    counsellingNote:
+      "Encourage exposure to teamwork and communication skills alongside technical depth.",
+  },
+  reflective: {
+    profileTitle: "Reflective & People-Understanding Thinker",
+    coreInclination:
+      "The student demonstrates depth of thought, empathy, and interest in understanding people, ideas, and systems at a conceptual level.",
+    naturalStrengths: [
+      "Critical reading and writing",
+      "Listening and perspective-taking",
+      "Research and reflection",
+      "Ethical and value-based thinking",
+    ],
+    preferredLearningStyle: [
+      "Discussions, debates, essays",
+      "Reading, writing, case studies",
+      "Time to reflect before responding",
+    ],
+    typicalBehaviours: [
+      "Thinks before speaking",
+      "Enjoys meaningful conversations",
+      "Connects ideas across subjects",
+    ],
+    motivatorsInterests: [
+      "Purpose, meaning, impact on people",
+      'Understanding "why society works the way it does"',
+    ],
+    explorationPathways:
+      "Law, teaching, psychology, research, policy studies, humanities, social sciences",
+    counsellingNote:
+      "Encourage confidence-building and decision-making in real-world contexts.",
+  },
+  creative: {
+    profileTitle: "Creative & Expressive Thinker",
+    coreInclination:
+      "The student is driven by imagination, expression, aesthetics, and originality.",
+    naturalStrengths: [
+      "Visual or verbal creativity",
+      "Storytelling and idea generation",
+      "Seeing possibilities beyond rules",
+      "Emotional and sensory awareness",
+    ],
+    preferredLearningStyle: [
+      "Open-ended tasks and projects",
+      "Visual, hands-on, or experiential learning",
+      "Freedom to explore and experiment",
+    ],
+    typicalBehaviours: [
+      "Thinks in images or stories",
+      "Enjoys creating rather than analysing",
+      "Dislikes rigid or repetitive tasks",
+    ],
+    motivatorsInterests: [
+      "Self-expression, originality, recognition",
+      "Creating something meaningful or beautiful",
+    ],
+    explorationPathways:
+      "Design, media, architecture, communication, writing, arts, content creation",
+    counsellingNote:
+      "Support structure, deadlines, and practical execution skills.",
+  },
+  leader: {
+    profileTitle: "Leadership & Action-Oriented Thinker",
+    coreInclination:
+      "The student is energetic, decisive, and socially driven, with a preference for action and influence.",
+    naturalStrengths: [
+      "Leadership and initiative",
+      "Persuasion and communication",
+      "Organising people and activities",
+      "Taking decisions under pressure",
+    ],
+    preferredLearningStyle: [
+      "Group work, simulations, real-life challenges",
+      "Hands-on projects and competitions",
+      "Learning by doing",
+    ],
+    typicalBehaviours: [
+      "Comfortable speaking up",
+      "Takes charge in group settings",
+      "Seeks impact and results",
+    ],
+    motivatorsInterests: [
+      "Achievement, recognition, momentum",
+      "Making things happen",
+    ],
+    explorationPathways:
+      "Business, management, entrepreneurship, sports, events, public-facing roles",
+    counsellingNote:
+      "Build patience, listening skills, and reflective thinking.",
+  },
+};
+
+export function getElaboratedProfile(
+  traitName: string
+): ElaboratedProfile | undefined {
+  return elaboratedProfiles[traitName];
 }

@@ -22,6 +22,17 @@ export interface TraitProfile {
   careers: string[];
 }
 
+export interface ElaboratedProfile {
+  profileTitle: string;
+  coreInclination: string;
+  naturalStrengths: string[];
+  preferredLearningStyle: string[];
+  typicalBehaviours: string[];
+  motivatorsInterests: string[];
+  explorationPathways: string;
+  counsellingNote: string;
+}
+
 export interface ReportData {
   student: Student;
   traits: TraitProfile[];
