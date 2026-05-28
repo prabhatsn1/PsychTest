@@ -113,19 +113,20 @@ function makeWhereFilter<T>(where: Record<string, unknown>) {
     );
 }
 
-function applySelect<T extends Record<string, unknown>>(
+function applySelect<T extends object>(
   item: T,
   select?: Record<string, boolean>
 ): Partial<T> {
   if (!select) return { ...item };
   const result: Record<string, unknown> = {};
+  const rec = item as Record<string, unknown>;
   for (const [key, included] of Object.entries(select)) {
-    if (included) result[key] = item[key];
+    if (included) result[key] = rec[key];
   }
   return result as Partial<T>;
 }
 
-function createModelDelegate<T extends Record<string, unknown>>(
+function createModelDelegate<T extends object>(
   getData: () => T[],
   setData: (items: T[]) => void
 ) {
@@ -143,8 +144,8 @@ function createModelDelegate<T extends Record<string, unknown>>(
       if (args?.orderBy) {
         const [field, dir] = Object.entries(args.orderBy)[0];
         items.sort((a, b) => {
-          const av = a[field] as string | number | Date;
-          const bv = b[field] as string | number | Date;
+          const av = (a as Record<string, unknown>)[field] as string | number | Date;
+          const bv = (b as Record<string, unknown>)[field] as string | number | Date;
           const cmp = av > bv ? 1 : av < bv ? -1 : 0;
           return dir === "desc" ? -cmp : cmp;
         });
@@ -159,7 +160,7 @@ function createModelDelegate<T extends Record<string, unknown>>(
         ...args.data,
         createdAt: now,
         updatedAt: now,
-      } as T;
+      } as unknown as T;
       const items = getData();
       items.push(newItem);
       setData(items);
