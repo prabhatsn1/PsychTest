@@ -32,8 +32,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-.env.example
-generated
 
 # vercel
 .vercel
@@ -41,3 +39,6 @@ generated
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# prisma generated client
+/generated
