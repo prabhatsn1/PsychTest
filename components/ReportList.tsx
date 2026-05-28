@@ -121,7 +121,7 @@ export default function ReportList({
                         href={report.pdfPath}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-indigo-600 hover:text-indigo-700 font-medium"
+                        className="text-xs text-brand-600 hover:text-brand-700 font-medium"
                       >
                         PDF
                       </a>

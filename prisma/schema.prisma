@@ -28,3 +28,25 @@ model Report {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+model Assessment {
+  id           String   @id @default(cuid())
+  studentName  String
+  mobile       String
+  classSection String
+  q1           String
+  q2           String
+  q3           String
+  q4           String
+  q5           String
+  q6           String
+  q7           String
+  q8           String
+  q9           String
+  q10          String
+  scoreA       Int      @default(0)
+  scoreB       Int      @default(0)
+  scoreC       Int      @default(0)
+  scoreD       Int      @default(0)
+  createdAt    DateTime @default(now())
+}

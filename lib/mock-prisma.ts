@@ -22,8 +22,31 @@ interface MockReport {
   updatedAt: Date;
 }
 
+interface MockAssessment {
+  id: string;
+  studentName: string;
+  mobile: string;
+  classSection: string;
+  q1: string;
+  q2: string;
+  q3: string;
+  q4: string;
+  q5: string;
+  q6: string;
+  q7: string;
+  q8: string;
+  q9: string;
+  q10: string;
+  scoreA: number;
+  scoreB: number;
+  scoreC: number;
+  scoreD: number;
+  createdAt: Date;
+}
+
 let admins: MockAdmin[] = [];
 let reports: MockReport[] = [];
+let assessments: MockAssessment[] = [];
 let seeded = false;
 
 async function ensureSeeded() {
@@ -83,26 +106,26 @@ async function ensureSeeded() {
   }
 }
 
-function makeWhereFilter<T extends object>(where: Record<string, unknown>) {
+function makeWhereFilter<T>(where: Record<string, unknown>) {
   return (item: T) =>
     Object.entries(where).every(
       ([key, val]) => (item as Record<string, unknown>)[key] === val
     );
 }
 
-function applySelect<T extends object>(
+function applySelect<T extends Record<string, unknown>>(
   item: T,
   select?: Record<string, boolean>
 ): Partial<T> {
-  if (!select) return { ...item } as Partial<T>;
+  if (!select) return { ...item };
   const result: Record<string, unknown> = {};
   for (const [key, included] of Object.entries(select)) {
-    if (included) result[key] = (item as Record<string, unknown>)[key];
+    if (included) result[key] = item[key];
   }
   return result as Partial<T>;
 }
 
-function createModelDelegate<T extends object>(
+function createModelDelegate<T extends Record<string, unknown>>(
   getData: () => T[],
   setData: (items: T[]) => void
 ) {
@@ -120,14 +143,13 @@ function createModelDelegate<T extends object>(
       if (args?.orderBy) {
         const [field, dir] = Object.entries(args.orderBy)[0];
         items.sort((a, b) => {
-          const av = (a as Record<string, unknown>)[field] as string | number | Date;
-          const bv = (b as Record<string, unknown>)[field] as string | number | Date;
+          const av = a[field] as string | number | Date;
+          const bv = b[field] as string | number | Date;
           const cmp = av > bv ? 1 : av < bv ? -1 : 0;
           return dir === "desc" ? -cmp : cmp;
         });
       }
-      if (!args?.select) return items as T[];
-      return items.map((item) => applySelect(item, args.select));
+      return items.map((item) => applySelect(item, args?.select));
     },
     async create(args: { data: Record<string, unknown> }) {
       await ensureSeeded();
@@ -137,7 +159,7 @@ function createModelDelegate<T extends object>(
         ...args.data,
         createdAt: now,
         updatedAt: now,
-      } as unknown as T;
+      } as T;
       const items = getData();
       items.push(newItem);
       setData(items);
@@ -163,6 +185,10 @@ export const mockPrisma = {
   report: createModelDelegate<MockReport>(
     () => reports,
     (items) => { reports = items; }
+  ),
+  assessment: createModelDelegate<MockAssessment>(
+    () => assessments,
+    (items) => { assessments = items; }
   ),
   async $queryRaw() {
     return [{ "?column?": 1 }];

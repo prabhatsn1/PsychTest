@@ -12,18 +12,10 @@ export default async function AdminDashboardPage() {
   });
 
   const serializedReports = reports.map((r) => ({
-    id: r.id!,
-    studentName: r.studentName!,
-    mobile: r.mobile!,
-    classSection: r.classSection!,
-    dateOfAssessment: r.dateOfAssessment?.toISOString() ?? "",
-    scoreA: r.scoreA!,
-    scoreB: r.scoreB!,
-    scoreC: r.scoreC!,
-    scoreD: r.scoreD!,
-    pdfPath: r.pdfPath!,
-    createdAt: r.createdAt?.toISOString() ?? "",
-    updatedAt: r.updatedAt?.toISOString() ?? "",
+    ...r,
+    dateOfAssessment: r.dateOfAssessment.toISOString(),
+    createdAt: r.createdAt.toISOString(),
+    updatedAt: r.updatedAt.toISOString(),
   }));
 
   return <AdminDashboardClient initialReports={serializedReports} />;
