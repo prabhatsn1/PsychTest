@@ -5,6 +5,7 @@ import type { Variants } from "framer-motion";
 import { studentLogout } from "@/app/actions/student";
 import Image from "next/image";
 import type { TraitProfile } from "@/lib/types";
+import { getElaboratedProfile } from "@/lib/traits";
 import {
   PieChart,
   Pie,
@@ -85,6 +86,8 @@ export default function ReportView({
     score: t.score,
     fullMark: totalAnswers || 10,
   }));
+
+  const elaborated = getElaboratedProfile(dominant.name);
 
   const traitTaglines: Record<string, string> = {
     analytical: "Analytical Thinking",
@@ -242,11 +245,161 @@ export default function ReportView({
           </div>
         </motion.div>
 
+        {/* Elaborated Student Profile */}
+        {elaborated && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            custom={2}
+            variants={fadeUp}
+            className="bg-white rounded-2xl border border-gray-100 overflow-hidden"
+          >
+            {/* Coloured header strip */}
+            <div
+              className="px-6 py-5 sm:px-8"
+              style={{
+                backgroundColor: `${dominant.color}10`,
+                borderBottom: `2px solid ${dominant.color}25`,
+              }}
+            >
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-1">
+                Elaborated Student Profile
+              </p>
+              <h2 className="text-xl font-bold" style={{ color: dominant.color }}>
+                {elaborated.profileTitle}
+              </h2>
+            </div>
+
+            <div className="p-6 sm:p-8 space-y-6">
+              {/* Core Inclination */}
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                  Core Inclination
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {elaborated.coreInclination}
+                </p>
+              </div>
+
+              {/* 4-panel grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Natural Strengths */}
+                <div className="rounded-xl bg-gray-50 p-4">
+                  <p
+                    className="text-xs font-semibold uppercase tracking-wider mb-3"
+                    style={{ color: dominant.color }}
+                  >
+                    Natural Strengths
+                  </p>
+                  <ul className="space-y-1.5">
+                    {elaborated.naturalStrengths.map((s) => (
+                      <li key={s} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span style={{ color: dominant.color }} className="mt-0.5 shrink-0">›</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Preferred Learning Style */}
+                <div className="rounded-xl bg-gray-50 p-4">
+                  <p
+                    className="text-xs font-semibold uppercase tracking-wider mb-3"
+                    style={{ color: dominant.color }}
+                  >
+                    Preferred Learning Style
+                  </p>
+                  <ul className="space-y-1.5">
+                    {elaborated.preferredLearningStyle.map((s) => (
+                      <li key={s} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span style={{ color: dominant.color }} className="mt-0.5 shrink-0">›</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Typical Behaviours */}
+                <div className="rounded-xl bg-gray-50 p-4">
+                  <p
+                    className="text-xs font-semibold uppercase tracking-wider mb-3"
+                    style={{ color: dominant.color }}
+                  >
+                    Typical Behaviours
+                  </p>
+                  <ul className="space-y-1.5">
+                    {elaborated.typicalBehaviours.map((s) => (
+                      <li key={s} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span style={{ color: dominant.color }} className="mt-0.5 shrink-0">›</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Motivators & Interests */}
+                <div className="rounded-xl bg-gray-50 p-4">
+                  <p
+                    className="text-xs font-semibold uppercase tracking-wider mb-3"
+                    style={{ color: dominant.color }}
+                  >
+                    Motivators &amp; Interests
+                  </p>
+                  <ul className="space-y-1.5">
+                    {elaborated.motivatorsInterests.map((s) => (
+                      <li key={s} className="flex items-start gap-2 text-sm text-gray-700">
+                        <span style={{ color: dominant.color }} className="mt-0.5 shrink-0">›</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Exploration Pathways */}
+              <div
+                className="rounded-xl p-4"
+                style={{
+                  backgroundColor: `${dominant.color}08`,
+                  border: `1px solid ${dominant.color}25`,
+                }}
+              >
+                <p
+                  className="text-xs font-semibold uppercase tracking-wider mb-2"
+                  style={{ color: dominant.color }}
+                >
+                  Exploration Pathways
+                </p>
+                <p className="text-sm text-gray-700">{elaborated.explorationPathways}</p>
+                <p className="text-xs text-gray-500 mt-2 italic">
+                  👉 {elaborated.counsellingNote}
+                </p>
+              </div>
+
+              {/* Important Counselling Note */}
+              <div className="rounded-xl bg-amber-50 border border-amber-200 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-amber-700 mb-2">
+                  🌱 Important Counselling Note
+                </p>
+                <div className="space-y-2 text-sm text-gray-700">
+                  <p>
+                    <strong>This profile reflects inclination, not limitation.</strong>
+                  </p>
+                  <p>
+                    Most students show a mix of A, B, C, and D traits. The dominant pattern helps
+                    start conversations — not make final decisions.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Score Breakdown – Pie Chart */}
         <motion.div
           initial="hidden"
           animate="visible"
-          custom={2}
+          custom={3}
           variants={fadeUp}
           className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8"
         >
