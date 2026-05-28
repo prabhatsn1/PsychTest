@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { studentLogout } from "@/app/actions/student";
+import Image from "next/image";
 import type { TraitProfile } from "@/lib/types";
 import {
   PieChart,
@@ -109,21 +110,12 @@ export default function ReportView({
       <header className="bg-white border-b border-gray-100">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-indigo-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                />
-              </svg>
-            </div>
+            <Image
+              src="/BigLeagueLogo.png"
+              alt="Big League Logo"
+              width={90}
+              height={30}
+            />
             <span className="text-lg font-semibold text-gray-900">
               PsychProfile
             </span>
@@ -150,7 +142,7 @@ export default function ReportView({
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <p className="text-sm text-indigo-600 font-medium mb-1">
+              <p className="text-sm text-brand-600 font-medium mb-1">
                 Psychometric Assessment Report
               </p>
               <h1 className="text-2xl font-semibold text-gray-900">
@@ -177,7 +169,7 @@ export default function ReportView({
                   href={student.pdfPath}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-50 text-indigo-600 text-sm font-medium hover:bg-indigo-100 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-50 text-brand-600 text-sm font-medium hover:bg-brand-100 transition-colors"
                 >
                   <svg
                     className="w-4 h-4"
@@ -205,7 +197,7 @@ export default function ReportView({
           animate="visible"
           custom={1}
           variants={fadeUp}
-          className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-2xl p-6 sm:p-8 text-white"
+          className="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-400 to-accent-300 rounded-2xl p-6 sm:p-8 text-white"
         >
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -535,9 +527,42 @@ export default function ReportView({
             natural tendencies — your potential is limitless. Talk to your
             counsellor to explore more. 🌟
           </p>
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-gray-400">
+            <a
+              href="tel:7303764346"
+              className="flex items-center gap-1 hover:text-accent-300 transition-colors"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              7303764346
+            </a>
+            <span className="w-px h-3 bg-gray-200" />
+            <a
+              href="https://www.jointhebigleague.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 hover:text-accent-300 transition-colors"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              www.jointhebigleague.com
+            </a>
+            <span className="w-px h-3 bg-gray-200" />
+            <a
+              href="mailto:info@jointhebigleague.com"
+              className="flex items-center gap-1 hover:text-accent-300 transition-colors"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              info@jointhebigleague.com
+            </a>
+          </div>
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-400">
             <span className="w-8 h-px bg-gray-200" />
-            <span>Report by <span className="font-semibold text-gray-500">TBL — The Big League</span></span>
+            <span>Report by <span className="font-semibold text-gray-500">TBL — the BigLeague</span></span>
             <span className="w-8 h-px bg-gray-200" />
           </div>
         </motion.div>

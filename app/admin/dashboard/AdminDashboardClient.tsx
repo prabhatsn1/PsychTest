@@ -4,6 +4,7 @@ import { useState } from "react";
 import { adminLogout } from "@/app/actions/admin";
 import UploadForm from "@/components/UploadForm";
 import ReportList from "@/components/ReportList";
+import Image from "next/image";
 
 const dashboardDateFormatter = new Intl.DateTimeFormat("en-GB", {
   day: "2-digit",
@@ -50,21 +51,12 @@ export default function AdminDashboardClient({
       <header className="bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-indigo-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-            </div>
+            <Image
+              src="/BigLeagueLogo.png"
+              alt="Big League Logo"
+              width={90}
+              height={30}
+            />
             <h1 className="text-lg font-semibold text-gray-900">
               Admin Dashboard
             </h1>
@@ -112,7 +104,7 @@ export default function AdminDashboardClient({
           </h2>
           <button
             onClick={() => setShowUpload(!showUpload)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 transition-all"
           >
             {showUpload ? (
               <>

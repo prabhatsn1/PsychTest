@@ -71,7 +71,7 @@ export default function UploadForm({
             <input
               name="studentName"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
               placeholder="Enter full name"
             />
           </div>
@@ -84,7 +84,7 @@ export default function UploadForm({
               required
               pattern="\d{10}"
               maxLength={10}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
               placeholder="10-digit number"
             />
           </div>
@@ -95,7 +95,7 @@ export default function UploadForm({
             <input
               name="classSection"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
               placeholder="e.g. 10-A"
             />
           </div>
@@ -107,7 +107,7 @@ export default function UploadForm({
               name="dateOfAssessment"
               type="date"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
             />
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function UploadForm({
                   max={10}
                   defaultValue={0}
                   required
-                  className="w-full px-3 py-2 rounded-lg border border-gray-200 text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-200 text-gray-900 text-center focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
                 />
               </div>
             ))}
@@ -154,7 +154,7 @@ export default function UploadForm({
             name="pdf"
             type="file"
             accept=".pdf"
-            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 transition-all"
+            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-brand-50 file:text-brand-600 hover:file:bg-brand-100 transition-all"
           />
         </div>
 
@@ -167,7 +167,7 @@ export default function UploadForm({
         <button
           type="submit"
           disabled={loading}
-          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-brand-600 text-white text-sm font-medium hover:bg-brand-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {loading ? "Uploading…" : "Upload Report"}
         </button>

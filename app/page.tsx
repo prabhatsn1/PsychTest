@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { studentLogin } from "@/app/actions/student";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function StudentLoginPage() {
   const [state, formAction, pending] = useActionState(studentLogin, null);
@@ -12,20 +13,14 @@ export default function StudentLoginPage() {
       <div className="w-full max-w-md">
         {/* Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-50 mb-5">
-            <svg
-              className="w-8 h-8 text-indigo-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
+          <div className="inline-flex items-center justify-center mb-5">
+            <Image
+              src="/BigLeagueLogo.png"
+              alt="Big League Logo"
+              width={160}
+              height={54}
+              priority
+            />
           </div>
           <h1 className="text-2xl font-semibold text-gray-900">
             PsychProfile
@@ -64,7 +59,7 @@ export default function StudentLoginPage() {
                   maxLength={10}
                   pattern="\d{10}"
                   autoComplete="tel"
-                  className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+                  className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-300/20 focus:border-accent-300 transition-all"
                   placeholder="Enter 10-digit number"
                 />
               </div>
@@ -90,7 +85,7 @@ export default function StudentLoginPage() {
             <button
               type="submit"
               disabled={pending}
-              className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full py-2.5 px-4 rounded-xl bg-brand-600 text-white font-medium hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-accent-300/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {pending ? (
                 <span className="inline-flex items-center gap-2">
@@ -129,7 +124,7 @@ export default function StudentLoginPage() {
           </p>
           <Link
             href="/admin/login"
-            className="inline-block mt-3 text-xs text-gray-400 hover:text-indigo-600 transition-colors"
+            className="inline-block mt-3 text-xs text-gray-400 hover:text-brand-600 transition-colors"
           >
             Admin Login →
           </Link>
