@@ -261,7 +261,6 @@ export default function AdminDashboardClient({
             <ExcelImportForm onImported={handleExcelImported} />
           </div>
         )}
-        </div>
 
         {/* Report List */}
         <ReportList reports={reports} onDelete={handleDeleted} />
