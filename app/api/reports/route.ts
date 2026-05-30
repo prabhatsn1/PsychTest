@@ -5,8 +5,6 @@ import {
 } from "@/lib/db-errors";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
 
 export async function POST(request: NextRequest) {
   const session = await getAdminSession();
@@ -23,7 +21,6 @@ export async function POST(request: NextRequest) {
   const scoreB = parseInt(formData.get("scoreB") as string) || 0;
   const scoreC = parseInt(formData.get("scoreC") as string) || 0;
   const scoreD = parseInt(formData.get("scoreD") as string) || 0;
-  const pdf = formData.get("pdf") as File | null;
 
   if (!studentName || !mobile || !classSection || !dateOfAssessment) {
     return NextResponse.json(
@@ -57,20 +54,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let pdfPath = "";
-    if (pdf && pdf.size > 0) {
-      const uploadsDir = path.join(process.cwd(), "public", "uploads");
-      await mkdir(uploadsDir, { recursive: true });
-
-      const sanitizedName = mobile.replace(/[^0-9]/g, "");
-      const fileName = `${sanitizedName}_${Date.now()}.pdf`;
-      const filePath = path.join(uploadsDir, fileName);
-
-      const buffer = Buffer.from(await pdf.arrayBuffer());
-      await writeFile(filePath, buffer);
-      pdfPath = `/uploads/${fileName}`;
-    }
-
     const report = await prisma.report.create({
       data: {
         studentName,
@@ -81,7 +64,7 @@ export async function POST(request: NextRequest) {
         scoreB,
         scoreC,
         scoreD,
-        pdfPath,
+        pdfPath: "",
       },
     });
 
