@@ -25,6 +25,8 @@ model Report {
   scoreC           Int      @default(0)
   scoreD           Int      @default(0)
   pdfPath          String
+  reportOpenedAt   DateTime?
+  reportOpenCount  Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
