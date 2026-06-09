@@ -101,6 +101,9 @@ export async function GET() {
         scoreD: true,
         pdfPath: true,
         createdAt: true,
+        updatedAt: true,
+        reportOpenedAt: true,
+        reportOpenCount: true,
       },
     });
 
