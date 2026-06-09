@@ -18,6 +18,8 @@ interface MockReport {
   scoreC: number;
   scoreD: number;
   pdfPath: string;
+  reportOpenedAt: Date | null;
+  reportOpenCount: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -68,7 +70,7 @@ async function ensureSeeded() {
       classSection: "10-A",
       dateOfAssessment: new Date("2026-05-15"),
       scoreA: 4, scoreB: 2, scoreC: 3, scoreD: 1,
-      pdfPath: "",
+      pdfPath: "", reportOpenedAt: null, reportOpenCount: 0,
     },
     {
       studentName: "Priya Sharma",
@@ -76,7 +78,7 @@ async function ensureSeeded() {
       classSection: "10-B",
       dateOfAssessment: new Date("2026-05-16"),
       scoreA: 1, scoreB: 5, scoreC: 2, scoreD: 2,
-      pdfPath: "",
+      pdfPath: "", reportOpenedAt: null, reportOpenCount: 0,
     },
     {
       studentName: "Rohan Gupta",
@@ -84,7 +86,7 @@ async function ensureSeeded() {
       classSection: "10-A",
       dateOfAssessment: new Date("2026-05-17"),
       scoreA: 2, scoreB: 1, scoreC: 5, scoreD: 2,
-      pdfPath: "",
+      pdfPath: "", reportOpenedAt: null, reportOpenCount: 0,
     },
     {
       studentName: "Sneha Patel",
@@ -92,7 +94,7 @@ async function ensureSeeded() {
       classSection: "10-C",
       dateOfAssessment: new Date("2026-05-18"),
       scoreA: 1, scoreB: 2, scoreC: 1, scoreD: 6,
-      pdfPath: "",
+      pdfPath: "", reportOpenedAt: null, reportOpenCount: 0,
     },
   ];
 
@@ -100,6 +102,8 @@ async function ensureSeeded() {
     reports.push({
       ...r,
       id: `mock-report-${reports.length + 1}`,
+      reportOpenedAt: null,
+      reportOpenCount: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -174,6 +178,25 @@ function createModelDelegate<T extends object>(
         setData(getData().filter((i) => !filter(i)));
       }
       return item ?? null;
+    },
+    async update(args: { where: Record<string, unknown>; data: Record<string, unknown> }) {
+      await ensureSeeded();
+      const filter = makeWhereFilter<T>(args.where);
+      const items = getData();
+      const idx = items.findIndex(filter);
+      if (idx === -1) return null;
+      const current = items[idx] as Record<string, unknown>;
+      const patch: Record<string, unknown> = {};
+      for (const [key, val] of Object.entries(args.data)) {
+        if (val !== null && typeof val === 'object' && 'increment' in (val as object)) {
+          patch[key] = ((current[key] as number) ?? 0) + (val as { increment: number }).increment;
+        } else {
+          patch[key] = val;
+        }
+      }
+      items[idx] = { ...current, ...patch, updatedAt: new Date() } as unknown as T;
+      setData(items);
+      return items[idx];
     },
   };
 }
