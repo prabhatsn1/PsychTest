@@ -24,6 +24,8 @@ export default async function AdminDashboardPage() {
     pdfPath: r.pdfPath!,
     createdAt: r.createdAt!.toISOString(),
     updatedAt: r.updatedAt!.toISOString(),
+    reportOpenedAt: r.reportOpenedAt ? r.reportOpenedAt.toISOString() : null,
+    reportOpenCount: r.reportOpenCount ?? 0,
   }));
 
   return <AdminDashboardClient initialReports={serializedReports} />;
