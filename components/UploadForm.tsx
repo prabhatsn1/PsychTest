@@ -15,6 +15,8 @@ interface SerializedReport {
   pdfPath: string;
   createdAt: string;
   updatedAt: string;
+  reportOpenedAt: string | null;
+  reportOpenCount: number;
 }
 
 const emptyFields = {
