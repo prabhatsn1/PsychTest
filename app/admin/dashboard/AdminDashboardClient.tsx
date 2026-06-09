@@ -27,8 +27,6 @@ interface SerializedReport {
   pdfPath: string;
   createdAt: string;
   updatedAt: string;
-  reportOpenedAt: string | null;
-  reportOpenCount: number;
 }
 
 type ActivePanel = "none" | "single" | "excel";
