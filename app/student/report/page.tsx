@@ -21,6 +21,15 @@ export default async function StudentReportPage() {
 
   if (!report) redirect("/");
 
+  // Track every open so the admin can see when and how many times the report was viewed
+  await prisma.report.update({
+    where: { mobile },
+    data: {
+      reportOpenedAt: report.reportOpenedAt ?? new Date(),
+      reportOpenCount: { increment: 1 },
+    },
+  });
+
   const traits = buildTraitProfiles(
     report.scoreA,
     report.scoreB,
