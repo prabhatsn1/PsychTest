@@ -14,6 +14,8 @@ interface SerializedReport {
   scoreD: number;
   pdfPath: string;
   createdAt: string;
+  reportOpenedAt: string | null;
+  reportOpenCount: number;
 }
 
 export default function ReportList({
@@ -90,7 +92,7 @@ export default function ReportList({
         <table className="w-full">
           <thead>
             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-              {["Student", "Mobile", "Class", "Scores (A/B/C/D)", "Date", ""].map(
+              {["Student", "Mobile", "Class", "Scores (A/B/C/D)", "Date", "Viewed", ""].map(
                 (h) => (
                   <th
                     key={h}
@@ -155,6 +157,38 @@ export default function ReportList({
                   style={{ color: "rgba(255,255,255,0.5)" }}
                 >
                   {new Date(report.dateOfAssessment).toLocaleDateString("en-IN")}
+                </td>
+                <td className="px-6 py-4 text-sm">
+                  {report.reportOpenedAt ? (
+                    <span
+                      title={`Opened on ${new Date(report.reportOpenedAt).toLocaleString("en-IN")}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full"
+                      style={{
+                        background: "rgba(16,185,129,0.15)",
+                        color: "#10B981",
+                        border: "1px solid rgba(16,185,129,0.25)",
+                      }}
+                    >
+                      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
+                        <circle cx="4" cy="4" r="4" />
+                      </svg>
+                      Viewed · {report.reportOpenCount}×
+                    </span>
+                  ) : (
+                    <span
+                      className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        color: "rgba(255,255,255,0.3)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    >
+                      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
+                        <circle cx="4" cy="4" r="4" />
+                      </svg>
+                      Not Viewed
+                    </span>
+                  )}
                 </td>
                 <td className="px-6 py-4 text-right">
                   <button
