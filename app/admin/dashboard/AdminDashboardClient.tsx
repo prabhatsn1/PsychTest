@@ -6,6 +6,7 @@ import UploadForm from "@/components/UploadForm";
 import ExcelImportForm from "@/components/ExcelImportForm";
 import ReportList from "@/components/ReportList";
 import Image from "next/image";
+import { exportReportsToExcel } from "@/lib/export-excel";
 
 const dashboardDateFormatter = new Intl.DateTimeFormat("en-GB", {
   day: "2-digit",
@@ -190,6 +191,24 @@ export default function AdminDashboardClient({
             Student Reports
           </p>
           <div className="flex items-center gap-2">
+            {/* Export to Excel */}
+            <button
+              onClick={() => exportReportsToExcel(reports)}
+              disabled={reports.length === 0}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                background: "rgba(92,171,246,0.15)",
+                color: "#5cabf6",
+                border: "1px solid rgba(92,171,246,0.25)",
+              }}
+              title={reports.length === 0 ? "No reports to export" : "Export all reports to Excel"}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 16v-4m0 0V8m0 4H8m0 0h8M4 12a8 8 0 1116 0 8 8 0 01-16 0z" />
+              </svg>
+              Export Excel
+            </button>
+
             {/* Import from Excel */}
             <button
               onClick={() => setActivePanel(activePanel === "excel" ? "none" : "excel")}
